@@ -4,22 +4,23 @@ import java.util.List;
 import java.util.Queue;
 
 public class BFS {
-    static List<Integer> breadthFirstPrint(int V, List<List<Integer>> adj) {
-        Queue<Integer> que = new LinkedList<>();
+    static List<Integer> breadthFirstList(int V, List<List<Integer>> adj){
         List<Integer> ans = new ArrayList<>();
-        int[] visited = new int[V+1];
+        boolean[] visited = new boolean[V+1];
+        Queue<Integer> que = new LinkedList<>();
         que.add(1);
-        visited[1] = 1;
+        visited[1] = true;
         while (!que.isEmpty()) {
             int elem = que.poll();
             ans.add(elem);
             for(int no: adj.get(elem)){
-                if(visited[no] != 1){
+                if(!visited[no]){
                     que.add(no);
-                    visited[no] = 1;
+                    visited[no] = true;
                 }
             }
         }
+
         return ans;
     }
 
@@ -63,7 +64,7 @@ public class BFS {
         List<List<Integer>> adj = makeAdjList(n, edges);
         // System.out.println(breadthFirstPrint(n, adj));
         // printLevelwise(n, adj);
-        List<Integer> ans = breadthFirstPrint(n, adj);
+        List<Integer> ans = breadthFirstList(n, adj);
         System.out.println(ans);
     }
 }

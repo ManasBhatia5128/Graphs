@@ -24,6 +24,18 @@ public class DFS {
             }
         }
     }
+    static void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited, ArrayList<Integer> ans){
+        if(visited[node]){
+            return;
+        }
+        visited[node] = true;
+        ans.add(node);
+        for(int elem: adj.get(node)){
+            if(!visited[elem]){
+                dfs(node, adj, visited, ans);
+            }
+        }
+    }
 
     static ArrayList<ArrayList<Integer>> makeAdjList(int V, int[][] edges) {
         ArrayList<ArrayList<Integer>> mainList = new ArrayList<>();

@@ -1,6 +1,8 @@
 package QuestionsOnTraversals;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class FloodFillAlgo {
     public static void main(String[] args) {
@@ -9,7 +11,7 @@ public class FloodFillAlgo {
                 { 1, 0, 1 }
         };
         int[][] ans = floodFill(grid, 1, 1, 2);
-        for(int[] elem: ans){
+        for (int[] elem : ans) {
             System.out.println(Arrays.toString(elem));
         }
     }
@@ -37,4 +39,26 @@ public class FloodFillAlgo {
         dfs(image, sr, sc, oldColor, color);
         return image;
     }
+
+    static int[][] flood(int[][] image, int sr, int sc, int color) {
+        int n = image.length;
+        int m = image[0].length;
+        int[][] ansMatrix = image.clone(); // deep copy ie actuallly copying elements
+        boolean[][] visited = new boolean[n][m];
+        Queue<Pair> que = new LinkedList<>();
+        int[] dx = { 0, 0, 1, -1 };
+        int[] dy = { 1, -1, 0, 0 };
+        int oldColor = image[sr][sc];
+        ansMatrix[sr][sc] = color;
+        visited[sr][sc] = true;
+        que.add(new Pair(sr, sc));
+        while (!que.isEmpty()) {
+            Pair poppedPair = que.poll();
+            int newX = poppedPair.e1;
+            int newY = poppedPair.e2;
+            
+        }
+
+    }
+
 }
