@@ -12,6 +12,36 @@ public class KahnSort {
         System.out.println(Arrays.toString(kahnSortBFSWithoutVisited(V, edges)));
     }
 
+    static int[] kahnSortBFSWithoutVisited(int V, int[][] edges) {
+        ArrayList<ArrayList<Integer>> adj = directedAdjacencyList(V, edges);
+        Queue<Integer> que = new LinkedList<>();
+        int[] ans = new int[V];
+        int[] inDegree = new int[V];
+        for (ArrayList<Integer> list : adj) {
+            for (int elem : list) {
+                inDegree[elem]++;
+            }
+        }
+        int cnt = 0;
+        for (int i = 0; i < V; i++) {
+            if (inDegree[i] == 0) {
+                que.add(i);
+            }
+        }
+        while (!que.isEmpty()) {
+            int elem = que.poll();
+            ans[cnt] = elem;
+            cnt++;
+            for(int num: adj.get(elem)){
+                inDegree[num]--;
+                if(inDegree[num] == 0){
+                    que.add(num);
+                }
+            }
+        }
+        return ans;
+    }
+
     static int[] kahnSortBFS(int V, int[][] edges) {
         ArrayList<ArrayList<Integer>> adj = directedAdjacencyList(V, edges);
         Queue<Integer> que = new LinkedList<>();
@@ -44,35 +74,7 @@ public class KahnSort {
         return ans;
     }
 
-    static int[] kahnSortBFSWithoutVisited(int V, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj = directedAdjacencyList(V, edges);
-        Queue<Integer> que = new LinkedList<>();
-        int[] ans = new int[V];
-        int[] inDegree = new int[V];
-        for (ArrayList<Integer> list : adj) {
-            for (int elem : list) {
-                inDegree[elem]++;
-            }
-        }
-        int cnt = 0;
-        for (int i = 0; i < V; i++) {
-            if (inDegree[i] == 0) {
-                que.add(i);
-            }
-        }
-        while (!que.isEmpty()) {
-            int elem = que.poll();
-            ans[cnt] = elem;
-            cnt++;
-            for(int num: adj.get(elem)){
-                inDegree[num]--;
-                if(inDegree[num] == 0){
-                    que.add(num);
-                }
-            }
-        }
-        return ans;
-    }
+    
 
     static ArrayList<ArrayList<Integer>> directedAdjacencyList(int V, int[][] edges) {
         // Observe that if vertices are 2 then nodes should be 0,1 only not any value
